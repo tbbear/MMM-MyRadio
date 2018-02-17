@@ -30,12 +30,16 @@ Module.register("MMM-MyRadio",{
 	    if(notification === "DATAT"){
   		this.processTText(payload);
 	    }
+	    if(notification === "DATAV"){
+  		this.processVText(payload);
+	    }
     	},
 
 	scheduleUpdate: function() {
 		setInterval(() => {
 			this.sendSocketNotification("Titel", this.config);
 			this.sendSocketNotification("Song", this.config);
+			this.sendSocketNotification("Volu", this.config);
 		}, this.config.updateInterval);
 	},
 
@@ -48,10 +52,16 @@ Module.register("MMM-MyRadio",{
           this.scheduleUpdate();
           this.SText = "warte...";
 	  this.TText = "...";
+	  this.VText = "..%";
         },
 
 	processSText: function(data) {
          	this.SText = data;
+		this.updateDom();
+	},
+
+	processVText: function(data) {
+         	this.VText = data;
 		this.updateDom();
 	},
 
@@ -127,7 +137,8 @@ Module.register("MMM-MyRadio",{
 			volumeMute.style.left = "181px";
 			volumeMute.addEventListener("click", () => volumecontrol('Mute'));
 		var Leer = document.createElement("div");
-			Leer.className = "leer";
+	        	Leer.classList.add("small", "bright", "leer");
+			Leer.innerHTML = "Vol:  <br>" + self.VText;
 			Leer.style.left = "241px";
 
 		function volumecontrol(action) {

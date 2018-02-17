@@ -2,13 +2,16 @@
 
 const NodeHelper = require('node_helper');
 const exec = require('child_process').exec;
+var execSync = require('child_process').execSync;
 var fs = require("fs");
 var titi = "";
 var song = "";
+var vol = "";
 
 module.exports = NodeHelper.create({
   start: function() {
     	console.log("Starting module: " + this.name);
+        exec("killall mpg123", null);
   }, 
  
   socketNotificationReceived: function(notification) {
@@ -24,6 +27,18 @@ module.exports = NodeHelper.create({
 	}
 	if (notification === "Mute") {
 		exec("amixer -q -D pulse sset Master toggle", null);
+	}
+	if (notification === "Volu") {
+		var lineReader = require("readline").createInterface({input: require("fs").createReadStream("/home/robert/MagicMirror/modules/MMM-MyRadio/VOL.log")});
+		lineReader.on("line", function (line) {
+		  var l = line.indexOf(" [");
+		  var n = line.indexOf("] ");
+		  if(l > -1) {
+		    vol = line.substr(l + 2, n-l-2);
+   	          }
+		});
+	        console.log("Volume: ", vol);
+		this.sendSocketNotification("DATAV", vol);
 	}
 	if (notification === "Titel") {
 		console.log("in RDS-Read");
@@ -50,6 +65,7 @@ module.exports = NodeHelper.create({
 		this.sendSocketNotification("DATAT", song);
 	}
 	else {
+		execSync("/home/robert/MagicMirror/modules/MMM-MyRadio/scripts/Vol.sh", null);
 		exec("/home/robert/MagicMirror/modules/MMM-MyRadio/scripts/" + notification + ".sh", null);
 	}
    }

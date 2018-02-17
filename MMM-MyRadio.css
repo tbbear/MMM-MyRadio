@@ -33,8 +33,11 @@
 	position: absolute;
         border-style: inset;
         border-width: 1px;
-  	width: 1px;
-	height: 58px;
+	text-align: center;
+  	width: 51px;
+	height: 60px;
+	overflow: hidden;
+	color: lightgreen;
 }
 
 .MMM-MyRadio .sender {
