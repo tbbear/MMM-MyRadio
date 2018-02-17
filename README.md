@@ -17,7 +17,7 @@ The module is based on the idea and code of MMM-TouchPlayerBasic by Pierre Brobe
 
 ## Installation
 
-* git clone https://github.com/tbbear/MMM-MyRadio` into the `~/MagicMirror/modules` directory.
+* git clone https://github.com/tbbear/MMM-MyRadio into the ~/MagicMirror/modules directory.
 
 ## Config.js entry and options
 
