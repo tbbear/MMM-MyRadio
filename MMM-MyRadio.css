@@ -1,6 +1,6 @@
 
 .MMM-MyRadio {
-	width: 292px;
+	width: 302px;
 	margin-right: 0px;
 	margin-left:  0px;
 }
@@ -8,7 +8,7 @@
 	display: block;
         border-style: inset;
         border-width: 1px;
-	width: 292px;
+	width: 302px;
 	height: 61px;
 }
 
@@ -17,7 +17,7 @@
 	margin-top: 1px;
         border-style: inset;
         border-width: 1px;
-	width: 292px;
+	width: 302px;
 	height: 61px;
 }
 
@@ -34,7 +34,7 @@
         border-style: inset;
         border-width: 1px;
 	text-align: center;
-  	width: 51px;
+  	width: 60px;
 	height: 60px;
 	overflow: hidden;
 	color: lightgreen;

@@ -10,7 +10,7 @@ To install it run : sudo apt-get install mpg123
 
 ## How it works
 
-The module plays up to 4 diff. Radiostations and if they show sender and RDS data also, u can select the station and the volume 
+The module plays up to 5 diff. Radiostations and if they show sender and RDS data also, u can select the station and the volume 
 with ur mouse, touchpad or touchscreen, soon also via MMM-voice.
 
 The module is based on the idea and code of MMM-TouchPlayerBasic by Pierre Broberg
@@ -29,7 +29,7 @@ The module is based on the idea and code of MMM-TouchPlayerBasic by Pierre Brobe
 			stations: [
 				"yourstation yourstation", // Separation by space, First part "yourstation" is the .png image filename, the second is .sh script name
 				]
-				...up to 4
+				...up to 5
 		}
 
 },
