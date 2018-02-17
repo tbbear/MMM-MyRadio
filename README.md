@@ -81,7 +81,8 @@ To make it executable via the terminal use : chmod +x filename.sh
 				"Bayern1 Bayern1", 
 				"Bayern3 Bayern3",
 				"Charivari Charivari",
-				"Kos Kos"
+				"Kos Kos",
+				"AB AB"
 				]
 
 		}
