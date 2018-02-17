@@ -1,0 +1,58 @@
+
+.MMM-MyRadio {
+	width: 292px;
+	margin-right: 0px;
+	margin-left:  0px;
+}
+.MMM-MyRadio .stationMenu {
+	display: block;
+        border-style: inset;
+        border-width: 1px;
+	width: 292px;
+	height: 61px;
+}
+
+.MMM-MyRadio .topMenu {
+	display: block;
+	margin-top: 1px;
+        border-style: inset;
+        border-width: 1px;
+	width: 292px;
+	height: 61px;
+}
+
+.MMM-MyRadio .button {
+	position: absolute;
+        border-style: inset;
+        border-width: 1px;
+  	width: 58px;
+	height: 58px;
+}
+
+.MMM-MyRadio .leer {
+	position: absolute;
+        border-style: inset;
+        border-width: 1px;
+  	width: 1px;
+	height: 58px;
+}
+
+.MMM-MyRadio .sender {
+	margin-top: 5px;
+        border-style: inset;
+        border-width: 1px;
+        text-align: left;
+	width: 100%;
+	color: orange;
+}
+
+.MMM-MyRadio .titel {
+        margin-top: 5px;
+        border: 1px solid white;
+	text-align: left;
+	width: 100%;
+	color: lightblue;
+	overflow: hidden;
+    animation: marquee 10s linear infinite;
+    -webkit-animation: marquee 10s linear infinite;
+}
