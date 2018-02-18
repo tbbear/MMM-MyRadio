@@ -6,6 +6,7 @@
  * MIT Licensed.
  */
 
+var statix = 0;
 
 Module.register("MMM-MyRadio",{
 
@@ -23,47 +24,6 @@ Module.register("MMM-MyRadio",{
 		return ["MMM-MyRadio.css"];
 	},
 	
-	socketNotificationReceived: function(notification, payload) {
-	    if(notification === "DATAS"){
- 		this.processSText(payload);
-       	    }
-	    if(notification === "DATAT"){
-  		this.processTText(payload);
-	    }
-	    if(notification === "DATAV"){
-  		this.processVText(payload);
-	    }
-            if (notification === "HIDE_MyRadio") {
-         	this.hide(1000);
-                this.updateDom(300);
-            }
-	    if (notification === "SHOW_MyRadio") {
-                this.show(1000);
-                this.updateDom(300);
-            }
-	    if (notification === "Radiostop"){
-                self.sendSocketNotification("Radiostop", {});
-            }
-            if (notification === "VolumeUp"){
-               self.sendSocketNotification("VolumeUp", {});
-            }
-            if (notification === "VolumeDown"){
-               self.sendSocketNotification("VolumeDown", {});
-            }
-            if (notification === "VolumeDown"){
-               self.sendSocketNotification("VolumeDown", {});
-            }
-            if (notification === "Sleep"){
-                self.sendSocketNotification("Off", {});
-            }
-            if (notification === "Wake"){
-               self.sendSocketNotification("On", {});
-            }
-	    else {
-               self.sendSocketNotification(notification, {});
-	    }
-	},
-
 	scheduleUpdate: function() {
 		setInterval(() => {
 			this.sendSocketNotification("Titel", this.config);
@@ -97,6 +57,55 @@ Module.register("MMM-MyRadio",{
 	processTText: function(data) {
          	this.TText = data;
 		this.updateDom();
+	},
+
+	socketNotificationReceived: function(notification, payload) {
+	    if(notification === "DATAS"){
+ 		this.processSText(payload);
+       	    }
+	    if(notification === "DATAT"){
+  		this.processTText(payload);
+	    }
+	    if(notification === "DATAV"){
+  		this.processVText(payload);
+	    }
+	},
+	
+	notificationReceived: function(notification, payload) {
+            if (notification === "HIDE_RADIO") {
+         	this.hide(1000);
+                this.updateDom(300);
+            }
+	    if (notification === "SHOW_RADIO") {
+                this.show(1000);
+                this.updateDom(300);
+            }
+	    if (notification === "NEXT_RADIO"){
+		var stationsArray = this.config.stations;
+		var strsplit = stationsArray[statix].split(" ")
+		let scriptfile = strsplit[1];
+		statix = statix + 1;
+		if (statix = 4) { statix = 0; }
+		this.sendSocketNotification(scriptfile, {});
+            }
+	    if (notification === "RADIO_STOP"){
+                this.sendSocketNotification("Radiostop", {});
+            }
+            if (notification === "VOLUME_UP"){
+                this.sendSocketNotification("VolumeUp", {});
+            }
+            if (notification === "VOLUME_DOWN"){
+                this.sendSocketNotification("VolumeDown", {});
+            }
+            if (notification === "VOLUME_MUTE"){
+                this.sendSocketNotification("Mute", {});
+            }
+            if (notification === "MIRROR_SLEEP"){
+                this.sendSocketNotification("Off", {});
+            }
+            if (notification === "MIRROR_WAKE"){
+                this.sendSocketNotification("On", {});
+            }
 	},
 
 	// Override dom generator.
