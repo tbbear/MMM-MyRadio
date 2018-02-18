@@ -91,4 +91,89 @@ To make it executable via the terminal use : chmod +x filename.sh
 
 ````
 # V1.01
-Now ready for MMM-voice
+Now ready for MMM-voice with the following commands:
+SHOW_RADIO
+HIDE_RADIO
+NEXT_RADIO
+STOP_RADIO
+VOLUME_UP
+VOLUME_DOWN
+VOLUME_MUTE
+MIRROR_SLEEP
+MIRROR_WAKE
+here are the adds for MMM-Voice:
+in MMM-voice.js:
+````javascript
+    voice: {
+        mode: 'VOICE',
+        sentences: [
+            'HIDE MODULES',
+            'SHOW MODULES',
+            'WAKE UP',
+            'GO TO SLEEP',
+            'OPEN HELP',
+            'CLOSE HELP',
+            'HIDE RADIO',
+            'SHOW RADIO',
+            'RADIO STOP',
+	    'NEXT RADIO',
+            'VOLUME UP',
+            'VOLUME DOWN',
+            'VOLUME MUTE',
+            'MIRROR SLEEP',
+            'MIRROR WAKE'
+        ]
+    },
+and
+        else if (notification === 'HIDE_RADIO') {
+             this.sendNotification('HIDE_RADIO');
+        }
+        else if (notification === 'SHOW_RADIO') {
+             this.sendNotification('SHOW_RADIO');
+        }
+        else if (notification === 'NEXT_RADIO') {
+             this.sendNotification('NEXT_RADIO');
+        }
+        else if (notification === 'RADIO_STOP') {
+             this.sendNotification('RADIO_STOP');
+        }
+        else if (notification === 'VOLUME_UP') {
+             this.sendNotification('VOLUME_UP');
+        }
+        else if (notification === 'VOLUME_DOWN') {
+             this.sendNotification('VOLUME_DOWN');
+        }
+        else if (notification === 'VOLUME_MUTE') {
+             this.sendNotification('VOLUME_MUTE');
+        }
+        else if (notification === 'MIRROR_SLEEP') {
+             this.sendNotification('MIRROR_SLEEP');
+        }
+        else if (notification === 'MIRROR_WAKE') {
+             this.sendNotification('MIRROR_WAKE');
+        }
+        this.updateDom(300);
+````
+and in MMM-voice node_helper.js:
+````javascript
+        } else if (/(SHOW)/g.test(data) && /(RADIO)/g.test(data)) {
+            this.sendSocketNotification('SHOW_RADIO');
+        } else if (/(HIDE)/g.test(data) && /(RADIO)/g.test(data)) {
+            this.sendSocketNotification('HIDE_RADIO');
+        } else if (/(NEXT)/g.test(data) && /(RADIO)/g.test(data)) {
+            this.sendSocketNotification('NEXT_RADIO');
+        } else if (/(RADIO)/g.test(data) && /(STOP)/g.test(data)) {
+            this.sendSocketNotification('RADIO_STOP');
+        } else if (/(VOLUME)/g.test(data) && /(UP)/g.test(data)) {
+            this.sendSocketNotification('VOLUME_UP');
+        } else if (/(VOLUME)/g.test(data) && /(DOWN)/g.test(data)) {
+            this.sendSocketNotification('VOLUME_DOWN');
+        } else if (/(VOLUME)/g.test(data) && /(MUTE)/g.test(data)) {
+            this.sendSocketNotification('VOLUME_MUTE');
+        } else if (/(MIRROR)/g.test(data) && /(SLEEP)/g.test(data)) {
+            this.sendSocketNotification('MIRROR_SLEEP');
+        } else if (/(MIRROR)/g.test(data) && /(WAKE)/g.test(data)) {
+            this.sendSocketNotification('MIRROR_WAKE');
+        }
+
+````
