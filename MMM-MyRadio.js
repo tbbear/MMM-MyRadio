@@ -33,7 +33,36 @@ Module.register("MMM-MyRadio",{
 	    if(notification === "DATAV"){
   		this.processVText(payload);
 	    }
-    	},
+            if (notification === "HIDE_MyRadio") {
+         	this.hide(1000);
+                this.updateDom(300);
+            }
+	    if (notification === "SHOW_MyRadio") {
+                this.show(1000);
+                this.updateDom(300);
+            }
+	    if (notification === "Radiostop"){
+                self.sendSocketNotification("Radiostop", {});
+            }
+            if (notification === "VolumeUp"){
+               self.sendSocketNotification("VolumeUp", {});
+            }
+            if (notification === "VolumeDown"){
+               self.sendSocketNotification("VolumeDown", {});
+            }
+            if (notification === "VolumeDown"){
+               self.sendSocketNotification("VolumeDown", {});
+            }
+            if (notification === "Sleep"){
+                self.sendSocketNotification("Off", {});
+            }
+            if (notification === "Wake"){
+               self.sendSocketNotification("On", {});
+            }
+	    else {
+               self.sendSocketNotification(notification, {});
+	    }
+	},
 
 	scheduleUpdate: function() {
 		setInterval(() => {
