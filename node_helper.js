@@ -29,7 +29,7 @@ module.exports = NodeHelper.create({
 		exec("amixer -q -D pulse sset Master toggle", null);
 	}
 	if (notification === "Volu") {
-		var lineReader = require("readline").createInterface({input: require("fs").createReadStream("/home/robert/MagicMirror/modules/MMM-MyRadio/VOL.log")});
+		var lineReader = require("readline").createInterface({input: require("fs").createReadStream(this.path + "/VOL.log")});
 		lineReader.on("line", function (line) {
 		  var l = line.indexOf(" [");
 		  var n = line.indexOf("] ");
@@ -42,7 +42,7 @@ module.exports = NodeHelper.create({
 	}
 	if (notification === "Titel") {
 		console.log("in RDS-Read");
-		var lineReader = require("readline").createInterface({input: require("fs").createReadStream("/home/robert/MagicMirror/modules/MMM-MyRadio/RDS.log")});
+		var lineReader = require("readline").createInterface({input: require("fs").createReadStream(this.path + "/RDS.log")});
 		lineReader.on("line", function (line) {
 		  var l = line.indexOf("ICY-NAME: ");
 		  if(l > -1) {
@@ -54,7 +54,7 @@ module.exports = NodeHelper.create({
 	}
 	if (notification === "Song") {
 		console.log("in RDS-Read");
-		var lineReader = require("readline").createInterface({input: require("fs").createReadStream("/home/robert/MagicMirror/modules/MMM-MyRadio/RDS.log")});
+		var lineReader = require("readline").createInterface({input: require("fs").createReadStream(this.path + "/RDS.log")});
 		lineReader.on("line", function (line) {
 		  var l = line.indexOf("ICY-META: StreamTitle=");
 		  if(l > -1) {
@@ -64,9 +64,16 @@ module.exports = NodeHelper.create({
 	        console.log(song);
 		this.sendSocketNotification("DATAT", song);
 	}
+	if (notification === "On") {
+		exec("xset -display :0.0 dpms force on", null);
+	}
+	if (notification === "Off") {
+		exec("xset -display :0.0 dpms force off", null);
+	}
 	else {
-		execSync("/home/robert/MagicMirror/modules/MMM-MyRadio/scripts/Vol.sh", null);
-		exec("/home/robert/MagicMirror/modules/MMM-MyRadio/scripts/" + notification + ".sh", null);
+		console.log(this.path);
+		execSync(this.path + "/scripts/Vol.sh", null);
+		exec(this.path + "/scripts/" + notification + ".sh", null);
 	}
    }
   
