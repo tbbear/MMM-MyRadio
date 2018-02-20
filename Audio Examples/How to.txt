@@ -1,0 +1,65 @@
+How to setup audio on your own PI system:
+Their are so many descriptions on how to do this so i dont want
+to write the next one. Get ur audio working using for 
+example: https://raspberry.tips/raspberrypi-tutorials/raspberry-pi-usb-soundkarte-unter-raspbian-einrichten/
+
+If u have a working audio than call
+
+amixer
+
+with an output like this:
+
+Simple mixer control 'Speaker',0
+  Capabilities: pvolume pswitch pswitch-joined
+  Playback channels: Front Left - Front Right
+  Limits: Playback 0 - 37
+  Mono:
+  Front Left: Playback 16 [43%] [-21.00dB] [on]
+  Front Right: Playback 16 [43%] [-21.00dB] [on]
+Simple mixer control 'Mic',0
+  Capabilities: pvolume pvolume-joined cvolume cvolume-joined pswitch pswitch-joined cswitch cswitch-joined
+  Playback channels: Mono
+  Capture channels: Mono
+  Limits: Playback 0 - 31 Capture 0 - 35
+  Mono: Playback 29 [94%] [6.00dB] [off] Capture 32 [91%] [20.00dB] [on]
+Simple mixer control 'Auto Gain Control',0
+  Capabilities: pswitch pswitch-joined
+  Playback channels: Mono
+  Mono: Playback [on]
+
+Now u can see the name of ur simple Mixer control in this case its 'Speaker'
+
+Go to the Audio example which fits to ur system and open the Vol.sh file:
+
+#!/bin/bash
+
+  amixer sget Speaker 1>~/MagicMirror/modules/MMM-MyRadio/VOL.log
+
+  
+replace the name here 'Speaker' with the one from your amixer output.
+
+Now open the node_helper.js file and search for this lines:
+
+	if (notification === "VolumeUp") {
+
+		exec("amixer -q sset Speaker 10%+", null);
+	
+	}
+
+	if (notification === "VolumeDown") {
+		exec("amixer -q sset Speaker 10%-", null);
+	
+	}
+
+	if (notification === "Mute") {
+
+		exec("amixer -q sset Speaker toggle", null);
+	
+	}
+
+
+Now do the same in this 3 lines and replace with your simple control name.
+After done than copy the Vol.sh file to the scripts folder and the node_helper.js
+to the modules directory.
+
+Hope this was it.
