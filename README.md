@@ -8,7 +8,8 @@ Radio Module for MM showing sender, RDS data and Soundvolume information
 This module requires that you have mpg123 installed.
 To install it run : sudo apt-get install mpg123 
 Make sure that all scripts in "scripts" folder are set as executable!!!
-
+Each system has its own audio config so i put 2 examples and a docu into the "Audio Examples" folder.
+If u found a new one for ur system feel free to tell me.
 
 ## How it works
 
@@ -19,7 +20,10 @@ The module is based on the idea and code of MMM-TouchPlayerBasic by Pierre Brobe
 
 ## Installation
 
+* sudo apt-get install mpg123
 * git clone https://github.com/tbbear/MMM-MyRadio into the `~/MagicMirror/modules` directory.
+
+Make sure that all scripts in "scripts" folder are set as executable!!!
 
 ## Config.js entry and options
 
