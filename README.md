@@ -7,6 +7,8 @@ Radio Module for MM showing sender, RDS data and Soundvolume information
 
 This module requires that you have mpg123 installed.
 To install it run : sudo apt-get install mpg123 
+Make sure that all scripts in "scripts" folder are set as executable!!!
+
 
 ## How it works
 
