@@ -14,21 +14,24 @@ module.exports = NodeHelper.create({
         exec("killall mpg123", null);
   }, 
  
-  socketNotificationReceived: function(notification) {
+  socketNotificationReceived: function(notification, payload) {
 
 	if (notification === "Radiostop") {
 		exec("killall mpg123", null);
 	}
-	if (notification === "VolumeUp") {
+	else if (notification === "VolumeUp") {
 		exec("amixer -q -D pulse sset Master 10%+", null);
 	}
-	if (notification === "VolumeDown") {
+	else if (notification === "VolumeDown") {
 		exec("amixer -q -D pulse sset Master 10%-", null);
 	}
-	if (notification === "Mute") {
+	else if (notification === "Mute") {
 		exec("amixer -q -D pulse sset Master toggle", null);
 	}
-	if (notification === "Volu") {
+	else if (notification === "VolumeSet") {
+		exec("amixer -q -D pulse sset Master " + payload, null);
+	}
+	else if (notification === "Volu") {
 		var lineReader = require("readline").createInterface({input: require("fs").createReadStream(this.path + "/VOL.log")});
 		lineReader.on("line", function (line) {
 		  var l = line.indexOf(" [");
@@ -40,7 +43,7 @@ module.exports = NodeHelper.create({
 	        console.log("Volume: ", vol);
 		this.sendSocketNotification("DATAV", vol);
 	}
-	if (notification === "Titel") {
+	else if (notification === "Titel") {
 		console.log("in RDS-Read");
 		var lineReader = require("readline").createInterface({input: require("fs").createReadStream(this.path + "/RDS.log")});
 		lineReader.on("line", function (line) {
@@ -52,7 +55,7 @@ module.exports = NodeHelper.create({
 	        console.log(titi);
 		this.sendSocketNotification("DATAS", titi);
 	}
-	if (notification === "Song") {
+	else if (notification === "Song") {
 		console.log("in RDS-Read");
 		var lineReader = require("readline").createInterface({input: require("fs").createReadStream(this.path + "/RDS.log")});
 		lineReader.on("line", function (line) {
@@ -64,17 +67,20 @@ module.exports = NodeHelper.create({
 	        console.log(song);
 		this.sendSocketNotification("DATAT", song);
 	}
-	if (notification === "On") {
+	else if (notification === "On") {
 		exec("xset -display :0.0 dpms force on", null);
 	}
-	if (notification === "Off") {
+	else if (notification === "Off") {
 		exec("xset -display :0.0 dpms force off", null);
 	}
-	else {
-		console.log(this.path);
-		execSync(this.path + "/scripts/Vol.sh", null);
-		exec(this.path + "/scripts/" + notification + ".sh", null);
+	else if (notification === "ChannelSet") {
+		exec(this.path + "/scripts/" + payload + ".sh", null);
+		console.log("ChannelSet to " + payload + " executed");
 	}
+	else {
+		console.log("Unknown notification received: " + notification);
+	}
+	execSync(this.path + "/scripts/Vol.sh", null);
    }
   
 });
