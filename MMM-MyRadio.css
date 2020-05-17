@@ -59,3 +59,8 @@
     animation: marquee 10s linear infinite;
     -webkit-animation: marquee 10s linear infinite;
 }
+
+div.middle.center .MMM-MyRadio {
+	margin: 0 auto;
+	position: relative;
+}
