@@ -34,8 +34,11 @@ Make sure that all scripts in "scripts" folder are set as executable!!!
 		config: {
 			stations: [
 				"yourstation yourstation", // Separation by space, First part "yourstation" is the .png image filename, the second is .sh script name
-				]
-				...up to 5
+				// ...up to 5 stations
+				],
+			autoplay: false, // if true, radio starts playing first channel when MagicMirror starts
+			volume: "100%", // enter a default start volume
+			showControls: true // if true, controls are shown on the mirror (radio can still be controlled by remote, if set to false)
 		}
 
 },
@@ -89,13 +92,18 @@ To make it executable via the terminal use : chmod +x filename.sh
 				"Charivari Charivari",
 				"Kos Kos",
 				"AB AB"
-				]
-
+				],
+				autoplay: true,
+				volume: "100%",
+				showControls: true
 		}
 
       },
 
 ````
+# V1.02
+Added autoplay, volume and showControls configuration parameter
+
 # V1.01
 Now ready for MMM-voice with the following commands:
 SHOW_RADIO
