@@ -101,6 +101,8 @@ To make it executable via the terminal use : chmod +x filename.sh
       },
 
 ````
+# V1.1
+Thanks to 
 # V1.02
 Added autoplay, volume and showControls configuration parameter
 
